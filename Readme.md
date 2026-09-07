@@ -39,3 +39,24 @@ In your terminal, compile the C++ backend:
 
 ```bash
 g++ -std=c++11 src/monitor.cpp -o monitor
+
+system-resource-monitor/
+│
+├── src/
+│   ├── monitor.cpp      # C++ telemetry engine (OS API reader)
+│   └── dashboard.py     # Python ASCII dashboard UI
+│
+├── data/
+│   └── system_stats.json # Runtime IPC data file (ignored by Git)
+│
+├── .gitignore            # Git exclusion rules for binaries and JSON logs
+└── README.md             # Project documentation
+
+#### LEVEL 2 (IN PROGRESS)
+
++--------------------------------------+                          +------------------------------------+
+|  C++ Micro-Backend Engine (Host)     |    HTTP GET /api/v1/stats|    Python Dashboard / Web Client   |
+|  - Queries OS APIs (Memory/CPU)      | <----------------------  |    - Asynchronous HTTP requests    |
+|  - Embedded HTTP REST Server         | ---------------------->  |    - Live ASCII / Plot CLI Output  |
+|  - Endpoint: `http://localhost:8080` |    Returns JSON Payload  |    - Configurable refresh interval |
++--------------------------------------+                          +------------------------------------+
